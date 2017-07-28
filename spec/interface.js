@@ -43,37 +43,37 @@ class Interface {
   encodeTokens (paramTypes, values) {
     return Interface.encodeTokens(paramTypes, values);
   }
+}
 
-  static encodeTokens (paramTypes, values) {
-    const createToken = function (paramType, value) {
-      if (paramType.subtype) {
-        return new Token(paramType.type, value.map((entry) => createToken(paramType.subtype, entry)));
-      }
+Interface.encodeTokens = function (paramTypes, values) {
+  const createToken = function (paramType, value) {
+    if (paramType.subtype) {
+      return new Token(paramType.type, value.map((entry) => createToken(paramType.subtype, entry)));
+    }
 
-      return new Token(paramType.type, value);
-    };
+    return new Token(paramType.type, value);
+  };
 
-    return paramTypes.map((paramType, idx) => createToken(paramType, values[idx]));
-  }
+  return paramTypes.map((paramType, idx) => createToken(paramType, values[idx]));
+}
 
-  static parseABI (abi) {
-    return abi.map((item) => {
-      switch (item.type) {
-        case 'constructor':
-          return new Constructor(item);
+Interface.parseABI = function (abi) {
+  return abi.map((item) => {
+    switch (item.type) {
+      case 'constructor':
+        return new Constructor(item);
 
-        case 'event':
-          return new Event(item);
+      case 'event':
+        return new Event(item);
 
-        case 'function':
-        case 'fallback':
-          return new Func(item);
+      case 'function':
+      case 'fallback':
+        return new Func(item);
 
-        default:
-          throw new Error(`Unknown ABI type ${item.type}`);
-      }
-    });
-  }
+      default:
+        throw new Error(`Unknown ABI type ${item.type}`);
+    }
+  });
 }
 
 mdoule.exports = Interface;

@@ -34,10 +34,10 @@ class EventParam {
   get indexed () {
     return this._indexed;
   }
+}
 
-  static toEventParams (params) {
-    return params.map((param) => new EventParam(param.name, param.type, param.indexed));
-  }
+EventParam.toEventParams = function (params) {
+  return params.map((param) => new EventParam(param.name, param.type, param.indexed));
 }
 
 module.exports = EventParam;

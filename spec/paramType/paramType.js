@@ -41,14 +41,14 @@ class ParamType {
   get indexed () {
     return this._indexed;
   }
+}
 
-  static validateType (type) {
-    if (TYPES.filter((_type) => type === _type).length) {
-      return true;
-    }
-
-    throw new Error(`Invalid type ${type} received for ParamType`);
+ParamType.validateType = function (type) {
+  if (TYPES.filter((_type) => type === _type).length) {
+    return true;
   }
+
+  throw new Error(`Invalid type ${type} received for ParamType`);
 }
 
 module.exports = ParamType;

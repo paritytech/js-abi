@@ -29,16 +29,16 @@ class Param {
   get kind () {
     return this._kind;
   }
+}
 
-  static toParams (params) {
-    return params.map((param) => {
-      if (param instanceof Param) {
-        return param;
-      }
+Param.toParams = function (params) {
+  return params.map((param) => {
+    if (param instanceof Param) {
+      return param;
+    }
 
-      return new Param(param.name, param.type);
-    });
-  }
+    return new Param(param.name, param.type);
+  });
 }
 
 module.exports = Param;

@@ -31,14 +31,14 @@ class Token {
   get value () {
     return this._value;
   }
+}
 
-  static validateType (type) {
-    if (TYPES.filter((_type) => type === _type).length) {
-      return true;
-    }
-
-    throw new Error(`Invalid type ${type} received for Token`);
+Token.validateType = function (type) {
+  if (TYPES.filter((_type) => type === _type).length) {
+    return true;
   }
+
+  throw new Error(`Invalid type ${type} received for Token`);
 }
 
 module.exports = Token;

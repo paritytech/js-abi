@@ -27,131 +27,132 @@ import { isArray, isInstanceOf } from '../util/types';
 const NULL = '0000000000000000000000000000000000000000000000000000000000000000';
 
 class Decoder {
-  static decode (params, data) {
-    if (!isArray(params)) {
-      throw new Error('Parameters should be array of ParamType');
-    }
+}
 
-    const slices = sliceData(data);
-    let offset = 0;
-
-    return params.map((param) => {
-      const result = Decoder.decodeParam(param, slices, offset);
-
-      offset = result.newOffset;
-      return result.token;
-    });
+Decoder.decode = function (params, data) {
+  if (!isArray(params)) {
+    throw new Error('Parameters should be array of ParamType');
   }
 
-  static peek (slices, position) {
-    if (!slices || !slices[position]) {
-      return NULL;
-    }
+  const slices = sliceData(data);
+  let offset = 0;
 
-    return slices[position];
+  return params.map((param) => {
+    const result = Decoder.decodeParam(param, slices, offset);
+
+    offset = result.newOffset;
+    return result.token;
+  });
+}
+
+Decoder.peek = function (slices, position) {
+  if (!slices || !slices[position]) {
+    return NULL;
   }
 
-  static takeBytes (slices, position, length) {
-    const slicesLength = Math.floor((length + 31) / 32);
-    let bytesStr = '';
+  return slices[position];
+}
 
-    for (let idx = 0; idx < slicesLength; idx++) {
-      bytesStr = `${bytesStr}${Decoder.peek(slices, position + idx)}`;
-    }
+Decoder.takeBytes = function (slices, position, length) {
+  const slicesLength = Math.floor((length + 31) / 32);
+  let bytesStr = '';
 
-    const bytes = (bytesStr.substr(0, length * 2).match(/.{1,2}/g) || []).map((code) => parseInt(code, 16));
-
-    return new BytesTaken(bytes, position + slicesLength);
+  for (let idx = 0; idx < slicesLength; idx++) {
+    bytesStr = `${bytesStr}${Decoder.peek(slices, position + idx)}`;
   }
 
-  static decodeParam (param, slices, offset) {
-    if (!isInstanceOf(param, ParamType)) {
-      throw new Error('param should be instanceof ParamType');
-    }
+  const bytes = (bytesStr.substr(0, length * 2).match(/.{1,2}/g) || []).map((code) => parseInt(code, 16));
 
-    const tokens = [];
-    let taken;
-    let lengthOffset;
-    let length;
-    let newOffset;
+  return new BytesTaken(bytes, position + slicesLength);
+}
 
-    switch (param.type) {
-      case 'address':
-        return new DecodeResult(new Token(param.type, asAddress(Decoder.peek(slices, offset))), offset + 1);
+Decoder.decodeParam = function (param, slices, offset) {
+  if (!isInstanceOf(param, ParamType)) {
+    throw new Error('param should be instanceof ParamType');
+  }
 
-      case 'bool':
-        return new DecodeResult(new Token(param.type, asBool(Decoder.peek(slices, offset))), offset + 1);
+  const tokens = [];
+  let taken;
+  let lengthOffset;
+  let length;
+  let newOffset;
 
-      case 'int':
-        return new DecodeResult(new Token(param.type, asI32(Decoder.peek(slices, offset))), offset + 1);
+  switch (param.type) {
+    case 'address':
+      return new DecodeResult(new Token(param.type, asAddress(Decoder.peek(slices, offset))), offset + 1);
 
-      case 'uint':
-        return new DecodeResult(new Token(param.type, asU32(Decoder.peek(slices, offset))), offset + 1);
+    case 'bool':
+      return new DecodeResult(new Token(param.type, asBool(Decoder.peek(slices, offset))), offset + 1);
 
-      case 'fixedBytes':
-        taken = Decoder.takeBytes(slices, offset, param.length);
+    case 'int':
+      return new DecodeResult(new Token(param.type, asI32(Decoder.peek(slices, offset))), offset + 1);
 
-        return new DecodeResult(new Token(param.type, taken.bytes), taken.newOffset);
+    case 'uint':
+      return new DecodeResult(new Token(param.type, asU32(Decoder.peek(slices, offset))), offset + 1);
 
-      case 'bytes':
-        lengthOffset = asU32(Decoder.peek(slices, offset)).div(32).toNumber();
-        length = asU32(Decoder.peek(slices, lengthOffset)).toNumber();
-        taken = Decoder.takeBytes(slices, lengthOffset + 1, length);
+    case 'fixedBytes':
+      taken = Decoder.takeBytes(slices, offset, param.length);
 
-        return new DecodeResult(new Token(param.type, taken.bytes), offset + 1);
+      return new DecodeResult(new Token(param.type, taken.bytes), taken.newOffset);
 
-      case 'string':
-        if (param.indexed) {
-          taken = Decoder.takeBytes(slices, offset, 32);
+    case 'bytes':
+      lengthOffset = asU32(Decoder.peek(slices, offset)).div(32).toNumber();
+      length = asU32(Decoder.peek(slices, lengthOffset)).toNumber();
+      taken = Decoder.takeBytes(slices, lengthOffset + 1, length);
 
-          return new DecodeResult(new Token('fixedBytes', taken.bytes), offset + 1);
-        }
+      return new DecodeResult(new Token(param.type, taken.bytes), offset + 1);
 
-        lengthOffset = asU32(Decoder.peek(slices, offset)).div(32).toNumber();
-        length = asU32(Decoder.peek(slices, lengthOffset)).toNumber();
-        taken = Decoder.takeBytes(slices, lengthOffset + 1, length);
+    case 'string':
+      if (param.indexed) {
+        taken = Decoder.takeBytes(slices, offset, 32);
 
-        const str = taken.bytes.map((code) => String.fromCharCode(code)).join('');
+        return new DecodeResult(new Token('fixedBytes', taken.bytes), offset + 1);
+      }
 
-        let decoded;
+      lengthOffset = asU32(Decoder.peek(slices, offset)).div(32).toNumber();
+      length = asU32(Decoder.peek(slices, lengthOffset)).toNumber();
+      taken = Decoder.takeBytes(slices, lengthOffset + 1, length);
 
-        try {
-          decoded = utf8.decode(str);
-        } catch (error) {
-          decoded = str;
-        }
+      const str = taken.bytes.map((code) => String.fromCharCode(code)).join('');
 
-        return new DecodeResult(new Token(param.type, decoded), offset + 1);
+      let decoded;
 
-      case 'array':
-        lengthOffset = asU32(Decoder.peek(slices, offset)).div(32).toNumber();
-        length = asU32(Decoder.peek(slices, lengthOffset)).toNumber();
-        newOffset = lengthOffset + 1;
+      try {
+        decoded = utf8.decode(str);
+      } catch (error) {
+        decoded = str;
+      }
 
-        for (let idx = 0; idx < length; idx++) {
-          const result = Decoder.decodeParam(param.subtype, slices, newOffset);
+      return new DecodeResult(new Token(param.type, decoded), offset + 1);
 
-          newOffset = result.newOffset;
-          tokens.push(result.token);
-        }
+    case 'array':
+      lengthOffset = asU32(Decoder.peek(slices, offset)).div(32).toNumber();
+      length = asU32(Decoder.peek(slices, lengthOffset)).toNumber();
+      newOffset = lengthOffset + 1;
 
-        return new DecodeResult(new Token(param.type, tokens), offset + 1);
+      for (let idx = 0; idx < length; idx++) {
+        const result = Decoder.decodeParam(param.subtype, slices, newOffset);
 
-      case 'fixedArray':
-        newOffset = offset;
+        newOffset = result.newOffset;
+        tokens.push(result.token);
+      }
 
-        for (let idx = 0; idx < param.length; idx++) {
-          const result = Decoder.decodeParam(param.subtype, slices, newOffset);
+      return new DecodeResult(new Token(param.type, tokens), offset + 1);
 
-          newOffset = result.newOffset;
-          tokens.push(result.token);
-        }
+    case 'fixedArray':
+      newOffset = offset;
 
-        return new DecodeResult(new Token(param.type, tokens), newOffset);
+      for (let idx = 0; idx < param.length; idx++) {
+        const result = Decoder.decodeParam(param.subtype, slices, newOffset);
 
-      default:
-        throw new Error(`Invalid param type ${param.type} in decodeParam`);
-    }
+        newOffset = result.newOffset;
+        tokens.push(result.token);
+      }
+
+      return new DecodeResult(new Token(param.type, tokens), newOffset);
+
+    default:
+      throw new Error(`Invalid param type ${param.type} in decodeParam`);
   }
 }
 

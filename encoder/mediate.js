@@ -114,31 +114,31 @@ class Mediate {
   get value () {
     return this._value;
   }
+}
 
-  static offsetFor (mediates, position) {
-    if (position < 0 || position >= mediates.length) {
-      throw new Error(`Invalid position ${position} specified for Mediate.offsetFor`);
-    }
-
-    const initLength = mediates
-      .reduce((total, mediate) => {
-        return total + mediate.initLength();
-      }, 0);
-
-    return mediates
-      .slice(0, position)
-      .reduce((total, mediate) => {
-        return total + mediate.closingLength();
-      }, initLength);
+Mediate.offsetFor = function (mediates, position) {
+  if (position < 0 || position >= mediates.length) {
+    throw new Error(`Invalid position ${position} specified for Mediate.offsetFor`);
   }
 
-  static validateType (type) {
-    if (TYPES.filter((_type) => type === _type).length) {
-      return true;
-    }
+  const initLength = mediates
+    .reduce((total, mediate) => {
+      return total + mediate.initLength();
+    }, 0);
 
-    throw new Error(`Invalid type ${type} received for Mediate.validateType`);
+  return mediates
+    .slice(0, position)
+    .reduce((total, mediate) => {
+      return total + mediate.closingLength();
+    }, initLength);
+}
+
+Mediate.validateType = function (type) {
+  if (TYPES.filter((_type) => type === _type).length) {
+    return true;
   }
+
+  throw new Error(`Invalid type ${type} received for Mediate.validateType`);
 }
 
 module.exports = Mediate;
