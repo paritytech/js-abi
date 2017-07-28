@@ -21,17 +21,17 @@ const { isArray } = require('./types');
 
 const ZERO_64 = '0000000000000000000000000000000000000000000000000000000000000000';
 
-export function padAddress (_input) {
+function padAddress (_input) {
   const input = _input.substr(0, 2) === '0x' ? _input.substr(2) : _input;
 
   return `${ZERO_64}${input}`.slice(-64);
 }
 
-export function padBool (input) {
+function padBool (input) {
   return `${ZERO_64}${input ? '1' : '0'}`.slice(-64);
 }
 
-export function padU32 (input) {
+function padU32 (input) {
   let bn = new BigNumber(input);
 
   if (bn.lessThan(0)) {
@@ -54,13 +54,13 @@ function stringToBytes (input) {
   }
 }
 
-export function padBytes (_input) {
+function padBytes (_input) {
   const input = stringToBytes(_input);
 
   return `${padU32(input.length)}${padFixedBytes(input)}`;
 }
 
-export function padFixedBytes (_input) {
+function padFixedBytes (_input) {
   const input = stringToBytes(_input);
   const sinput = input.map((code) => `0${code.toString(16)}`.slice(-2)).join('');
   const max = Math.floor((sinput.length + 63) / 64) * 64;
@@ -68,10 +68,19 @@ export function padFixedBytes (_input) {
   return `${sinput}${ZERO_64}`.substr(0, max);
 }
 
-export function padString (input) {
+function padString (input) {
   const array = utf8.encode(input)
     .split('')
     .map((char) => char.charCodeAt(0));
 
   return padBytes(array);
 }
+
+module.exports = {
+  padAddress,
+  padBool,
+  padU32,
+  padBytes,
+  padFixedBytes,
+  padString
+};

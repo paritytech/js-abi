@@ -18,13 +18,13 @@ const BigNumber = require('bignumber.js');
 
 const { toChecksumAddress } = require('./address');
 
-export function asU32 (slice) {
+function asU32 (slice) {
   // TODO: validation
 
   return new BigNumber(slice, 16);
 }
 
-export function asI32 (slice) {
+function asI32 (slice) {
   if (new BigNumber(slice.substr(0, 1), 16).toString(2)[0] === '1') {
     return new BigNumber(slice, 16)
       .minus(new BigNumber('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 16))
@@ -34,14 +34,21 @@ export function asI32 (slice) {
   return new BigNumber(slice, 16);
 }
 
-export function asAddress (slice) {
+function asAddress (slice) {
   // TODO: address validation?
 
   return toChecksumAddress(`0x${slice.slice(-40)}`);
 }
 
-export function asBool (slice) {
+function asBool (slice) {
   // TODO: everything else should be 0
 
   return new BigNumber(slice[63]).eq(1);
 }
+
+module.exports = {
+  asAddress,
+  asBool,
+  asI32,
+  asU32
+};

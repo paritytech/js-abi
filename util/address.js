@@ -16,7 +16,7 @@
 
 const { keccak_256 } = require('js-sha3'); // eslint-disable-line camelcase
 
-export function isChecksumValid (_address) {
+function isChecksumValid (_address) {
   const address = _address.replace('0x', '');
   const hash = keccak_256(address.toLowerCase());
 
@@ -34,7 +34,7 @@ export function isChecksumValid (_address) {
   return true;
 }
 
-export function isAddress (address) {
+function isAddress (address) {
   if (address && address.length === 42) {
     if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
       return false;
@@ -48,7 +48,7 @@ export function isAddress (address) {
   return false;
 }
 
-export function toChecksumAddress (_address) {
+function toChecksumAddress (_address) {
   const address = (_address || '').toLowerCase();
 
   if (!isAddress(address)) {
@@ -64,3 +64,9 @@ export function toChecksumAddress (_address) {
 
   return result;
 }
+
+module.exports = {
+  isAddress,
+  isChecksumValid,
+  toChecksumAddress
+};

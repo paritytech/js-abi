@@ -14,14 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-export function isArray (test) {
+function isArray (test) {
   return Object.prototype.toString.call(test) === '[object Array]';
 }
 
-export function isString (test) {
+function isString (test) {
   return Object.prototype.toString.call(test) === '[object String]';
 }
 
-export function isInstanceOf (test, clazz) {
+function isInstanceOf (test, clazz) {
   return test instanceof clazz;
+}
+
+module.exports = {
+  isArray,
+  isString,
+  isInstanceOf
 }

@@ -16,7 +16,7 @@
 
 const ParamType = require('./paramType');
 
-export function toParamType (type, indexed) {
+function toParamType (type, indexed) {
   if (type[type.length - 1] === ']') {
     const last = type.lastIndexOf('[');
     const length = type.substr(last + 1, type.length - last - 2);
@@ -53,7 +53,7 @@ export function toParamType (type, indexed) {
   }
 }
 
-export function fromParamType (paramType) {
+function fromParamType (paramType) {
   switch (paramType.type) {
     case 'address':
     case 'bool':
@@ -77,4 +77,9 @@ export function fromParamType (paramType) {
     default:
       throw new Error(`Cannot convert from ParamType ${paramType.type}`);
   }
+}
+
+module.exports = {
+  fromParamType,
+  toParamType
 }

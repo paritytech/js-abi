@@ -17,7 +17,7 @@
 const { keccak_256 } = require('js-sha3'); // eslint-disable-line camelcase
 const { fromParamType } = require('../spec/paramType/format');
 
-export function eventSignature (eventName, params) {
+function eventSignature (eventName, params) {
   const { strName, name } = parseName(eventName);
   const types = (params || []).map(fromParamType).join(',');
   const id = `${strName}(${types})`;
@@ -26,7 +26,7 @@ export function eventSignature (eventName, params) {
   return { id, name, signature };
 }
 
-export function methodSignature (methodName, params) {
+function methodSignature (methodName, params) {
   const { id, name, signature } = eventSignature(methodName, params);
 
   return { id, name, signature: signature.substr(0, 8) };
@@ -47,3 +47,8 @@ function parseName (name) {
     name: trimmedName
   };
 }
+
+module.exports = {
+  eventSignature,
+  methodSignature
+};

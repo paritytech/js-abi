@@ -16,7 +16,7 @@
 
 const { padAddress } = require('./pad');
 
-export function sliceData (_data) {
+function sliceData (_data) {
   if (!_data || !_data.length) {
     return [];
   }
@@ -29,3 +29,7 @@ export function sliceData (_data) {
 
   return data.match(/.{1,64}/g);
 }
+
+module.exports = {
+  sliceData
+};
