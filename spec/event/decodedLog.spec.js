@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import DecodedLog from './decodedLog';
+const DecodedLog = require('./decodedLog');
 
 const log = new DecodedLog('someParams', 'someAddress');
 

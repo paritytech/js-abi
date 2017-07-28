@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import { toParamType } from '../paramType/format';
+const { toParamType } = require('../paramType/format');
 
 class EventParam {
   constructor (name, type, indexed = false) {

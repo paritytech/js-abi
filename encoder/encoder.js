@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import { padAddress, padBool, padBytes, padFixedBytes, padU32, padString } from '../util/pad';
-import Mediate from './mediate';
-import Token from '../token/token';
-import { isArray, isInstanceOf } from '../util/types';
+const { padAddress, padBool, padBytes, padFixedBytes, padU32, padString } = require('../util/pad');
+const Mediate = require('./mediate');
+const Token = require('../token/token');
+const { isArray, isInstanceOf } = require('../util/types');
 
 class Encoder {
 }

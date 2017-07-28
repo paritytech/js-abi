@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Encoder from '../encoder/encoder';
-import Param from './param';
+const Encoder = require('../encoder/encoder');
+const Param = require('./param');
 
 class Constructor {
   constructor (abi) {

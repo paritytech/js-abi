@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import { asAddress, asBool, asI32, asU32 } from './sliceAs';
+const { asAddress, asBool, asI32, asU32 } = require('./sliceAs');
 
 describe('abi/util/sliceAs', () => {
   const MAX_INT = 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';

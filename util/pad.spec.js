@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import BigNumber from 'bignumber.js';
-import { padAddress, padBool, padBytes, padFixedBytes, padString, padU32 } from './pad';
+const BigNumber = require('bignumber.js');
+const { padAddress, padBool, padBytes, padFixedBytes, padString, padU32 } = require('./pad');
 
 describe('abi/util/pad', () => {
   const SHORT15 = '1234567890abcdef';

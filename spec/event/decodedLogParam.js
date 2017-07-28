@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import ParamType from '../paramType/paramType';
-import Token from '../../token/token';
-import { isInstanceOf } from '../../util/types';
+const ParamType = require('../paramType/paramType');
+const Token = require('../../token/token');
+const { isInstanceOf } = require('../../util/types');
 
 class DecodedLogParam {
   constructor (name, kind, token) {

@@ -14,15 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import utf8 from 'utf8';
+const utf8 = require('utf8');
 
-import Token from '../token/token';
-import BytesTaken from './bytesTaken';
-import DecodeResult from './decodeResult';
-import ParamType from '../spec/paramType/paramType';
-import { sliceData } from '../util/slice';
-import { asAddress, asBool, asI32, asU32 } from '../util/sliceAs';
-import { isArray, isInstanceOf } from '../util/types';
+const Token = require('../token/token');
+const BytesTaken = require('./bytesTaken');
+const DecodeResult = require('./decodeResult');
+const ParamType = require('../spec/paramType/paramType');
+const { sliceData } = require('../util/slice');
+const { asAddress, asBool, asI32, asU32 } = require('../util/sliceAs');
+const { isArray, isInstanceOf } = require('../util/types');
 
 const NULL = '0000000000000000000000000000000000000000000000000000000000000000';
 

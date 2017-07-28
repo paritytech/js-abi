@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import { keccak_256 } from 'js-sha3'; // eslint-disable-line camelcase
-import { fromParamType } from '../spec/paramType/format';
+const { keccak_256 } = require('js-sha3'); // eslint-disable-line camelcase
+const { fromParamType } = require('../spec/paramType/format');
 
 export function eventSignature (eventName, params) {
   const { strName, name } = parseName(eventName);

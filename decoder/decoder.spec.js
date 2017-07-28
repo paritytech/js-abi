@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import BigNumber from 'bignumber.js';
+const BigNumber = require('bignumber.js');
 
-import Decoder from './decoder';
-import ParamType from '../spec/paramType';
-import Token from '../token';
-import { padU32 } from '../util/pad';
+const Decoder = require('./decoder');
+const ParamType = require('../spec/paramType');
+const Token = require('../token');
+const { padU32 } = require('../util/pad');
 
 describe('abi/decoder/Decoder', () => {
   const stringToBytes = function (str) {

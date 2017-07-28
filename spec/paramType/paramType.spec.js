@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import ParamType from './paramType';
+const ParamType = require('./paramType');
 
 describe('abi/spec/paramType/ParamType', () => {
   describe('validateType', () => {

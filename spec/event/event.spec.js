@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import BigNumber from 'bignumber.js';
+const BigNumber = require('bignumber.js');
 
-import Event from './event';
-import EventParam from './eventParam';
-import DecodedLogParam from './decodedLogParam';
-import ParamType from '../paramType';
-import Token from '../../token';
+const Event = require('./event');
+const EventParam = require('./eventParam');
+const DecodedLogParam = require('./decodedLogParam');
+const ParamType = require('../paramType');
+const Token = require('../../token');
 
 describe('abi/spec/event/Event', () => {
   const inputArr = [{ name: 'a', type: 'bool' }, { name: 'b', type: 'uint', indexed: true }];

@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import TYPES from '../spec/paramType/types';
+const TYPES = require('../spec/paramType/types');
 
 class Token {
   constructor (type, value) {

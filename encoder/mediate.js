@@ -16,7 +16,7 @@
 
 const TYPES = ['raw', 'prefixed', 'fixedArray', 'array'];
 
-import { padU32 } from '../util/pad';
+const { padU32 } = require('../util/pad');
 
 class Mediate {
   constructor (type, value) {

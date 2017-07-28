@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Decoder from '../decoder/decoder';
-import Encoder from '../encoder/encoder';
-import Param from './param';
-import { methodSignature } from '../util/signature';
+const Decoder = require('../decoder/decoder');
+const Encoder = require('../encoder/encoder');
+const Param = require('./param');
+const { methodSignature } = require('../util/signature');
 
 class Func {
   constructor (abi) {

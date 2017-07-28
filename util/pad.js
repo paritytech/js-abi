@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import BigNumber from 'bignumber.js';
-import utf8 from 'utf8';
+const BigNumber = require('bignumber.js');
+const utf8 = require('utf8');
 
-import { isArray } from './types';
+const { isArray } = require('./types');
 
 const ZERO_64 = '0000000000000000000000000000000000000000000000000000000000000000';
 

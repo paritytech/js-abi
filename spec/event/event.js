@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Decoder from '../../decoder/decoder';
-import DecodedLog from './decodedLog';
-import DecodedLogParam from './decodedLogParam';
-import EventParam from './eventParam';
-import { asAddress } from '../../util/sliceAs';
-import { eventSignature } from '../../util/signature';
+const Decoder = require('../../decoder/decoder');
+const DecodedLog = require('./decodedLog');
+const DecodedLogParam = require('./decodedLogParam');
+const EventParam = require('./eventParam');
+const { asAddress } = require('../../util/sliceAs');
+const { eventSignature } = require('../../util/signature');
 
 class Event {
   constructor (abi) {

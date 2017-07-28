@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import { isArray, isString, isInstanceOf } from './types';
-import Token from '../token';
+const { isArray, isString, isInstanceOf } = require('./types');
+const Token = require('../token');
 
 describe('abi/util/types', () => {
   describe('isArray', () => {

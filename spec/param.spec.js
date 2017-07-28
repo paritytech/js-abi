@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Param from './param';
+const Param = require('./param');
 
 describe('abi/spec/Param', () => {
   describe('constructor', () => {

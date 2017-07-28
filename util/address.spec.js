@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import { isChecksumValid, isAddress, toChecksumAddress } from './address';
+const { isChecksumValid, isAddress, toChecksumAddress } = require('./address');
 
 describe('abi/util/address', () => {
   const value = '63Cf90D3f0410092FC0fca41846f596223979195';

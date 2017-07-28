@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Mediate from './mediate';
+const Mediate = require('./mediate');
 
 describe('abi/encoder/Mediate', () => {
   const LONG15 = '1234567890abcdef000000000000000000000000000000000000000000000000';

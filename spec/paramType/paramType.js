@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import TYPES from './types';
+const TYPES = require('./types');
 
 class ParamType {
   constructor (type, subtype = null, length = 0, indexed = false) {

@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Func from './function';
-import Param from './param';
-import Token from '../token';
+const Func = require('./function');
+const Param = require('./param');
+const Token = require('../token');
 
 describe('abi/spec/Function', () => {
   const inputsArr = [{ name: 'boolin', type: 'bool' }, { name: 'stringin', type: 'string' }];

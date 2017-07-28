@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Interface from './interface';
-import ParamType from './paramType';
-import Token from '../token';
+const Interface = require('./interface');
+const ParamType = require('./paramType');
+const Token = require('../token');
 
 describe('abi/spec/Interface', () => {
   const construct = {

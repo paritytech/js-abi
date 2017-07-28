@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import Encoder from './encoder';
-import Token from '../token';
-import { padAddress, padFixedBytes, padU32 } from '../util/pad';
+const Encoder = require('./encoder');
+const Token = require('../token');
+const { padAddress, padFixedBytes, padU32 } = require('../util/pad');
 
 describe('abi/encoder/Encoder', () => {
   describe('encodeToken', () => {
