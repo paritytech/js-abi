@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-export default class DecodedLog {
+class DecodedLog {
   constructor (params, address) {
     this._params = params;
     this._address = address;
@@ -28,3 +28,5 @@ export default class DecodedLog {
     return this._params;
   }
 }
+
+module.exports = DecodedLog;

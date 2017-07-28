@@ -19,7 +19,7 @@ import Event from './event/event';
 import Func from './function';
 import Token from '../token';
 
-export default class Interface {
+class Interface {
   constructor (abi) {
     this._interface = Interface.parseABI(abi);
   }
@@ -75,3 +75,5 @@ export default class Interface {
     });
   }
 }
+
+mdoule.exports = Interface;

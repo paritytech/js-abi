@@ -26,7 +26,7 @@ import { isArray, isInstanceOf } from '../util/types';
 
 const NULL = '0000000000000000000000000000000000000000000000000000000000000000';
 
-export default class Decoder {
+class Decoder {
   static decode (params, data) {
     if (!isArray(params)) {
       throw new Error('Parameters should be array of ParamType');
@@ -154,3 +154,5 @@ export default class Decoder {
     }
   }
 }
+
+module.exports = Decoder;

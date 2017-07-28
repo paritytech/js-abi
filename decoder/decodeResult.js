@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-export default class DecodeResult {
+class DecodeResult {
   constructor (token, newOffset) {
     this._token = token;
     this._newOffset = newOffset;
@@ -28,3 +28,5 @@ export default class DecodeResult {
     return this._newOffset;
   }
 }
+
+module.exports = DecodeResult;

@@ -18,7 +18,7 @@ import ParamType from '../paramType/paramType';
 import Token from '../../token/token';
 import { isInstanceOf } from '../../util/types';
 
-export default class DecodedLogParam {
+class DecodedLogParam {
   constructor (name, kind, token) {
     if (!isInstanceOf(kind, ParamType)) {
       throw new Error('kind not instanceof ParamType');
@@ -43,3 +43,5 @@ export default class DecodedLogParam {
     return this._token;
   }
 }
+
+module.exports = DecodedLogParam;

@@ -18,7 +18,7 @@ const TYPES = ['raw', 'prefixed', 'fixedArray', 'array'];
 
 import { padU32 } from '../util/pad';
 
-export default class Mediate {
+class Mediate {
   constructor (type, value) {
     Mediate.validateType(type);
 
@@ -140,3 +140,5 @@ export default class Mediate {
     throw new Error(`Invalid type ${type} received for Mediate.validateType`);
   }
 }
+
+module.exports = Mediate;

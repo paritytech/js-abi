@@ -16,7 +16,7 @@
 
 import { toParamType } from './paramType/format';
 
-export default class Param {
+class Param {
   constructor (name, type) {
     this._name = name;
     this._kind = toParamType(type);
@@ -40,3 +40,5 @@ export default class Param {
     });
   }
 }
+
+module.exports = Param;

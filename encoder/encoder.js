@@ -19,7 +19,7 @@ import Mediate from './mediate';
 import Token from '../token/token';
 import { isArray, isInstanceOf } from '../util/types';
 
-export default class Encoder {
+class Encoder {
   static encode (tokens) {
     if (!isArray(tokens)) {
       throw new Error('tokens should be array of Token');
@@ -73,3 +73,5 @@ export default class Encoder {
     throw new Error(`Invalid token type ${token.type} in encodeToken`);
   }
 }
+
+module.exports = Encoder;

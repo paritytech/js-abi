@@ -17,7 +17,7 @@
 import Encoder from '../encoder/encoder';
 import Param from './param';
 
-export default class Constructor {
+class Constructor {
   constructor (abi) {
     this._inputs = Param.toParams(abi.inputs || []);
   }
@@ -34,3 +34,5 @@ export default class Constructor {
     return Encoder.encode(tokens);
   }
 }
+
+module.exports = Constructor;

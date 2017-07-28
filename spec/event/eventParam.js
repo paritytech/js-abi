@@ -16,7 +16,7 @@
 
 import { toParamType } from '../paramType/format';
 
-export default class EventParam {
+class EventParam {
   constructor (name, type, indexed = false) {
     this._name = name;
     this._indexed = indexed;
@@ -39,3 +39,5 @@ export default class EventParam {
     return params.map((param) => new EventParam(param.name, param.type, param.indexed));
   }
 }
+
+module.exports = EventParam;

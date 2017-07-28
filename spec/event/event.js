@@ -21,7 +21,7 @@ import EventParam from './eventParam';
 import { asAddress } from '../../util/sliceAs';
 import { eventSignature } from '../../util/signature';
 
-export default class Event {
+class Event {
   constructor (abi) {
     this._inputs = EventParam.toEventParams(abi.inputs || []);
     this._anonymous = !!abi.anonymous;
@@ -112,3 +112,5 @@ export default class Event {
     return new DecodedLog(decodedParams, address);
   }
 }
+
+module.exports = Event;

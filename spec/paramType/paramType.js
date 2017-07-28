@@ -16,7 +16,7 @@
 
 import TYPES from './types';
 
-export default class ParamType {
+class ParamType {
   constructor (type, subtype = null, length = 0, indexed = false) {
     ParamType.validateType(type);
 
@@ -50,3 +50,5 @@ export default class ParamType {
     throw new Error(`Invalid type ${type} received for ParamType`);
   }
 }
+
+module.exports = ParamType;

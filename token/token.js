@@ -16,7 +16,7 @@
 
 import TYPES from '../spec/paramType/types';
 
-export default class Token {
+class Token {
   constructor (type, value) {
     Token.validateType(type);
 
@@ -40,3 +40,5 @@ export default class Token {
     throw new Error(`Invalid type ${type} received for Token`);
   }
 }
+
+module.exports = Token;

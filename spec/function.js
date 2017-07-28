@@ -19,7 +19,7 @@ import Encoder from '../encoder/encoder';
 import Param from './param';
 import { methodSignature } from '../util/signature';
 
-export default class Func {
+class Func {
   constructor (abi) {
     this._abi = abi;
     this._constant = !!abi.constant;
@@ -86,3 +86,5 @@ export default class Func {
     return Decoder.decode(this.outputParamTypes(), data);
   }
 }
+
+module.exports = Func;
