@@ -20,11 +20,15 @@
     "Parity"
   ],
   "scripts": {
+    "test": "NODE_ENV=test mocha ./**/*.spec.js"
   },
   "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2"
   },
   "dependencies": {
     "bignumber.js": "3.0.1",
-    "js-sha3": "0.5.5"
+    "js-sha3": "0.5.5",
+    "utf8": "^2.1.2"
   }
 }

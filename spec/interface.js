@@ -76,4 +76,4 @@ Interface.parseABI = function (abi) {
   });
 }
 
-mdoule.exports = Interface;
+module.exports = Interface;
