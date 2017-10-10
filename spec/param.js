@@ -39,6 +39,6 @@ Param.toParams = function (params) {
 
     return new Param(param.name, param.type);
   });
-}
+};
 
 module.exports = Param;

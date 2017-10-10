@@ -55,7 +55,7 @@ Interface.encodeTokens = function (paramTypes, values) {
   };
 
   return paramTypes.map((paramType, idx) => createToken(paramType, values[idx]));
-}
+};
 
 Interface.parseABI = function (abi) {
   return abi.map((item) => {
@@ -74,6 +74,6 @@ Interface.parseABI = function (abi) {
         throw new Error(`Unknown ABI type ${item.type}`);
     }
   });
-}
+};
 
 module.exports = Interface;

@@ -131,7 +131,7 @@ Mediate.offsetFor = function (mediates, position) {
     .reduce((total, mediate) => {
       return total + mediate.closingLength();
     }, initLength);
-}
+};
 
 Mediate.validateType = function (type) {
   if (TYPES.filter((_type) => type === _type).length) {
@@ -139,6 +139,6 @@ Mediate.validateType = function (type) {
   }
 
   throw new Error(`Invalid type ${type} received for Mediate.validateType`);
-}
+};
 
 module.exports = Mediate;

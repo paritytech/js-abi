@@ -82,4 +82,4 @@ function fromParamType (paramType) {
 module.exports = {
   fromParamType,
   toParamType
-}
+};

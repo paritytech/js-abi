@@ -38,6 +38,6 @@ class EventParam {
 
 EventParam.toEventParams = function (params) {
   return params.map((param) => new EventParam(param.name, param.type, param.indexed));
-}
+};
 
 module.exports = EventParam;

@@ -39,6 +39,6 @@ Token.validateType = function (type) {
   }
 
   throw new Error(`Invalid type ${type} received for Token`);
-}
+};
 
 module.exports = Token;

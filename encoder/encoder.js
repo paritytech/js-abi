@@ -36,7 +36,7 @@ Encoder.encode = function (tokens) {
     .join('');
 
   return `${inits}${closings}`;
-}
+};
 
 Encoder.encodeToken = function (token, index = 0) {
   if (!isInstanceOf(token, Token)) {
@@ -73,6 +73,6 @@ Encoder.encodeToken = function (token, index = 0) {
   }
 
   throw new Error(`Invalid token type ${token.type} in encodeToken`);
-}
+};
 
 module.exports = Encoder;

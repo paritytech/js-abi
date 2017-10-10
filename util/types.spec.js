@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
+/* eslint-disable no-unused-expressions */
+
 const { isArray, isString, isInstanceOf } = require('./types');
 const Token = require('../token');
 

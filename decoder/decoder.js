@@ -43,7 +43,7 @@ Decoder.decode = function (params, data) {
     offset = result.newOffset;
     return result.token;
   });
-}
+};
 
 Decoder.peek = function (slices, position) {
   if (!slices || !slices[position]) {
@@ -51,7 +51,7 @@ Decoder.peek = function (slices, position) {
   }
 
   return slices[position];
-}
+};
 
 Decoder.takeBytes = function (slices, position, length) {
   const slicesLength = Math.floor((length + 31) / 32);
@@ -64,7 +64,7 @@ Decoder.takeBytes = function (slices, position, length) {
   const bytes = (bytesStr.substr(0, length * 2).match(/.{1,2}/g) || []).map((code) => parseInt(code, 16));
 
   return new BytesTaken(bytes, position + slicesLength);
-}
+};
 
 Decoder.decodeParam = function (param, slices, offset) {
   if (!isInstanceOf(param, ParamType)) {
@@ -154,6 +154,6 @@ Decoder.decodeParam = function (param, slices, offset) {
     default:
       throw new Error(`Invalid param type ${param.type} in decodeParam`);
   }
-}
+};
 
 module.exports = Decoder;
