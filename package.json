@@ -20,6 +20,10 @@
     "Parity"
   ],
   "scripts": {
+    "build": "echo \"WARN: npm run build skipped\"",
+    "lint": "npm run lint:css && npm run lint:js",
+    "lint:css": "stylelint ./src/**/*.css",
+    "lint:js": "eslint --ignore-path .gitignore ./src/",
     "test": "NODE_ENV=test mocha ./**/*.spec.js"
   },
   "devDependencies": {
