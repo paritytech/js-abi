@@ -1,11 +1,11 @@
-# ethabi-js
+# @parity/abi
 
 A very early, very POC-type port of [https://github.com/paritytech/ethabi](https://github.com/paritytech/ethabi) to JavaScript
 
-[![Build Status](https://travis-ci.org/jacogr/ethabi-js.svg?branch=master)](https://travis-ci.org/jacogr/ethabi-js)
-[![Coverage Status](https://coveralls.io/repos/github/jacogr/ethabi-js/badge.svg?branch=master)](https://coveralls.io/github/jacogr/ethabi-js?branch=master)
-[![Dependency Status](https://david-dm.org/jacogr/ethabi-js.svg)](https://david-dm.org/jacogr/ethabi-js)
-[![devDependency Status](https://david-dm.org/jacogr/ethabi-js/dev-status.svg)](https://david-dm.org/jacogr/ethabi-js#info=devDependencies)
+[![Build Status](https://travis-ci.org/paritytech/js-abi.svg?branch=master)](https://travis-ci.org/paritytech/js-abi)
+[![Coverage Status](https://coveralls.io/repos/github/paritytech/js-abi/badge.svg?branch=master)](https://coveralls.io/github/paritytech/js-abi?branch=master)
+[![Dependency Status](https://david-dm.org/paritytech/js-abi.svg)](https://david-dm.org/paritytech/js-abi)
+[![devDependency Status](https://david-dm.org/paritytech/js-abi/dev-status.svg)](https://david-dm.org/paritytech/js-abi#info=devDependencies)
 
 ## contributing
 
