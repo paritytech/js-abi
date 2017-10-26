@@ -48,9 +48,13 @@ function stringToBytes (input) {
   } else if (input.substr(0, 2) === '0x') {
     const matches = input.substr(2).toLowerCase().match(/.{1,2}/g) || [];
 
-    return matches.map((value) => parseInt(value, 16));
+    return matches.map(function (value) {
+      return parseInt(value, 16);
+    });
   } else {
-    return input.split('').map((char) => char.charCodeAt(0));
+    return input.split('').map(function (char) {
+      return char.charCodeAt(0);
+    });
   }
 }
 
@@ -62,7 +66,9 @@ function padBytes (_input) {
 
 function padFixedBytes (_input) {
   const input = stringToBytes(_input);
-  const sinput = input.map((code) => `0${code.toString(16)}`.slice(-2)).join('');
+  const sinput = input.map(function (code) {
+    return `0${code.toString(16)}`.slice(-2);
+  }).join('');
   const max = Math.floor((sinput.length + 63) / 64) * 64;
 
   return `${sinput}${ZERO_64}`.substr(0, max);
@@ -71,7 +77,9 @@ function padFixedBytes (_input) {
 function padString (input) {
   const array = utf8.encode(input)
     .split('')
-    .map((char) => char.charCodeAt(0));
+    .map(function (char) {
+      return char.charCodeAt(0);
+    });
 
   return padBytes(array);
 }

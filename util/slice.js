@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-const { padAddress } = require('./pad');
+const padder = require('./pad');
 
 function sliceData (_data) {
   if (!_data || !_data.length) {
@@ -24,7 +24,7 @@ function sliceData (_data) {
   let data = (_data.substr(0, 2) === '0x') ? _data.substr(2) : _data;
 
   if (!data.length) {
-    data = padAddress('');
+    data = padder.padAddress('');
   }
 
   return data.match(/.{1,64}/g);

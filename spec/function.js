@@ -67,11 +67,15 @@ class Func {
   }
 
   inputParamTypes () {
-    return this._inputs.map((input) => input.kind);
+    return this._inputs.map(function (input) {
+      return input.kind;
+    });
   }
 
   outputParamTypes () {
-    return this._outputs.map((output) => output.kind);
+    return this._outputs.map(function (output) {
+      return output.kind;
+    });
   }
 
   encodeCall (tokens) {

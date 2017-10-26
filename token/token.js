@@ -34,7 +34,7 @@ class Token {
 }
 
 Token.validateType = function (type) {
-  if (TYPES.filter((_type) => type === _type).length) {
+  if (TYPES.filter(function (_type) { return type === _type; }).length) {
     return true;
   }
 

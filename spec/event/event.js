@@ -54,15 +54,21 @@ class Event {
   }
 
   inputParamTypes () {
-    return this._inputs.map((input) => input.kind);
+    return this._inputs.map(function (input) {
+      return input.kind;
+    });
   }
 
   inputParamNames () {
-    return this._inputs.map((input) => input.name);
+    return this._inputs.map(function (input) {
+      return input.name;
+    });
   }
 
   indexedParams (indexed) {
-    return this._inputs.filter((input) => input.indexed === indexed);
+    return this._inputs.filter(function (input) {
+      return input.indexed === indexed;
+    });
   }
 
   decodeLog (topics, data) {
@@ -79,7 +85,9 @@ class Event {
       toSkip = 0;
     }
 
-    const topicTypes = topicParams.map((param) => param.kind);
+    const topicTypes = topicParams.map(function (param) {
+      return param.kind;
+    });
     const flatTopics = topics
       .filter(function (topic, idx) {
         return idx >= toSkip;
@@ -96,7 +104,9 @@ class Event {
       throw new Error('Invalid topic data');
     }
 
-    const dataTypes = dataParams.map((param) => param.kind);
+    const dataTypes = dataParams.map(function (param) {
+      return param.kind;
+    });
     const dataTokens = Decoder.decode(dataTypes, data);
 
     const namedTokens = {};
@@ -110,7 +120,9 @@ class Event {
 
     const inputParamTypes = this.inputParamTypes();
     const decodedParams = this.inputParamNames()
-      .map((name, idx) => new DecodedLogParam(name, inputParamTypes[idx], namedTokens[name || idx]));
+      .map(function (name, idx) {
+        return new DecodedLogParam(name, inputParamTypes[idx], namedTokens[name || idx]);
+      });
 
     return new DecodedLog(decodedParams, address);
   }

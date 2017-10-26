@@ -27,12 +27,18 @@ Encoder.encode = function (tokens) {
     throw new Error('tokens should be array of Token');
   }
 
-  const mediates = tokens.map((token, index) => Encoder.encodeToken(token, index));
+  const mediates = tokens.map(function (token, index) {
+    return Encoder.encodeToken(token, index);
+  });
   const inits = mediates
-    .map((mediate, idx) => mediate.init(Mediate.offsetFor(mediates, idx)))
+    .map(function (mediate, idx) {
+      return mediate.init(Mediate.offsetFor(mediates, idx));
+    })
     .join('');
   const closings = mediates
-    .map((mediate, idx) => mediate.closing(Mediate.offsetFor(mediates, idx)))
+    .map(function (mediate, idx) {
+      return mediate.closing(Mediate.offsetFor(mediates, idx));
+    })
     .join('');
 
   return `${inits}${closings}`;
@@ -66,7 +72,9 @@ Encoder.encodeToken = function (token, index = 0) {
 
       case 'fixedArray':
       case 'array':
-        return new Mediate(token.type, token.value.map((token) => Encoder.encodeToken(token)));
+        return new Mediate(token.type, token.value.map(function (token) {
+          return Encoder.encodeToken(token));
+        });
     }
   } catch (e) {
     throw new Error(`Cannot encode token #${index} [${token.type}: ${token.value}]. ${e.message}`);

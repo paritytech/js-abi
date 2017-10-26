@@ -61,7 +61,9 @@ Decoder.takeBytes = function (slices, position, length) {
     bytesStr = `${bytesStr}${Decoder.peek(slices, position + idx)}`;
   }
 
-  const bytes = (bytesStr.substr(0, length * 2).match(/.{1,2}/g) || []).map((code) => parseInt(code, 16));
+  const bytes = (bytesStr.substr(0, length * 2).match(/.{1,2}/g) || []).map(function (code) {
+    return parseInt(code, 16);
+  });
 
   return new BytesTaken(bytes, position + slicesLength);
 };
@@ -113,7 +115,9 @@ Decoder.decodeParam = function (param, slices, offset) {
       length = asU32(Decoder.peek(slices, lengthOffset)).toNumber();
       taken = Decoder.takeBytes(slices, lengthOffset + 1, length);
 
-      const str = taken.bytes.map((code) => String.fromCharCode(code)).join('');
+      const str = taken.bytes.map(function (code) {
+        return String.fromCharCode(code)).join('');
+      });
 
       let decoded;
 

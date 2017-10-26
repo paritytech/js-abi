@@ -27,7 +27,9 @@ class Constructor {
   }
 
   inputParamTypes () {
-    return this._inputs.map((input) => input.kind);
+    return this._inputs.map(function (input) {
+      return input.kind;
+    });
   }
 
   encodeCall (tokens) {

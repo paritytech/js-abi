@@ -16,7 +16,7 @@
 
 const TYPES = ['raw', 'prefixed', 'fixedArray', 'array'];
 
-const { padU32 } = require('../util/pad');
+const padder = require('../util/pad');
 
 class Mediate {
   constructor (type, value) {
@@ -72,12 +72,14 @@ class Mediate {
 
       case 'fixedArray':
         return this._value
-          .map((mediate, idx) => mediate.init(Mediate.offsetFor(this._value, idx)).toString(16))
+          .map(function (mediate, idx) {
+            return mediate.init(Mediate.offsetFor(this._value, idx)).toString(16);
+          })
           .join('');
 
       case 'prefixed':
       case 'array':
-        return padU32(suffixOffset);
+        return padder.padU32(suffixOffset);
     }
   }
 
@@ -91,16 +93,22 @@ class Mediate {
 
       case 'fixedArray':
         return this._value
-          .map((mediate, idx) => mediate.closing(Mediate.offsetFor(this._value, idx)).toString(16))
+          .map(function (mediate, idx) {
+            return mediate.closing(Mediate.offsetFor(this._value, idx)).toString(16);
+          })
           .join('');
 
       case 'array':
         const prefix = padU32(this._value.length);
         const inits = this._value
-          .map((mediate, idx) => mediate.init(offset + Mediate.offsetFor(this._value, idx) + 32).toString(16))
+          .map(function (mediate, idx) {
+            return mediate.init(offset + Mediate.offsetFor(this._value, idx) + 32).toString(16);
+          })
           .join('');
         const closings = this._value
-          .map((mediate, idx) => mediate.closing(offset + Mediate.offsetFor(this._value, idx)).toString(16))
+          .map(function (mediate, idx) {
+            return mediate.closing(offset + Mediate.offsetFor(this._value, idx)).toString(16);
+          })
           .join('');
 
         return `${prefix}${inits}${closings}`;
@@ -134,7 +142,7 @@ Mediate.offsetFor = function (mediates, position) {
 };
 
 Mediate.validateType = function (type) {
-  if (TYPES.filter((_type) => type === _type).length) {
+  if (TYPES.filter(function (_type) { return type === _type; }).length) {
     return true;
   }
 
