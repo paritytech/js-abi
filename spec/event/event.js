@@ -18,19 +18,19 @@ const Decoder = require('../../decoder/decoder');
 const DecodedLog = require('./decodedLog');
 const DecodedLogParam = require('./decodedLogParam');
 const EventParam = require('./eventParam');
-const { asAddress } = require('../../util/sliceAs');
-const { eventSignature } = require('../../util/signature');
+const sliceAs = require('../../util/sliceAs');
+const signature = require('../../util/signature');
 
 class Event {
   constructor (abi) {
     this._inputs = EventParam.toEventParams(abi.inputs || []);
     this._anonymous = !!abi.anonymous;
 
-    const { id, name, signature } = eventSignature(abi.name, this.inputParamTypes());
+    const sig = signature.eventSignature(abi.name, this.inputParamTypes());
 
-    this._id = id;
-    this._name = name;
-    this._signature = signature;
+    this._id = sig.id;
+    this._name = sig.name;
+    this._signature = sig.signature;
   }
 
   get name () {
@@ -79,7 +79,7 @@ class Event {
     let toSkip;
 
     if (!this.anonymous) {
-      address = asAddress(topics[0]);
+      address = sliceAs.asAddress(topics[0]);
       toSkip = 1;
     } else {
       toSkip = 0;

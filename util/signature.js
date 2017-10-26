@@ -14,22 +14,30 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-const { keccak_256 } = require('js-sha3'); // eslint-disable-line camelcase
-const { fromParamType } = require('../spec/paramType/format');
+const jssha = require('js-sha3'); // eslint-disable-line camelcase
+const format = require('../spec/paramType/format');
 
 function eventSignature (eventName, params) {
-  const { strName, name } = parseName(eventName);
-  const types = (params || []).map(fromParamType).join(',');
-  const id = `${strName}(${types})`;
-  const signature = strName ? keccak_256(id) : '';
+  const _name = parseName(eventName);
+  const types = (params || []).map(format.fromParamType).join(',');
+  const id = `${_name.strName}(${types})`;
+  const signature = _name.strName ? jssha.keccak_256(id) : '';
 
-  return { id, name, signature };
+  return {
+    id,
+    name: _name.name,
+    signature
+  };
 }
 
 function methodSignature (methodName, params) {
-  const { id, name, signature } = eventSignature(methodName, params);
+  const sig = eventSignature(methodName, params);
 
-  return { id, name, signature: signature.substr(0, 8) };
+  return {
+    id: sig.id,
+    name: sig.name,
+    signature: sig.signature.substr(0, 8)
+  };
 }
 
 function parseName (name) {

@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-const { toParamType } = require('./paramType/format');
+const format = require('./paramType/format');
 
 class Param {
   constructor (name, type) {
     this._name = name;
-    this._kind = toParamType(type);
+    this._kind = format.toParamType(type);
   }
 
   get name () {

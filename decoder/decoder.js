@@ -20,9 +20,9 @@ const Token = require('../token/token');
 const BytesTaken = require('./bytesTaken');
 const DecodeResult = require('./decodeResult');
 const ParamType = require('../spec/paramType/paramType');
-const { sliceData } = require('../util/slice');
-const { asAddress, asBool, asI32, asU32 } = require('../util/sliceAs');
-const { isArray, isInstanceOf } = require('../util/types');
+const slicer = require('../util/slice');
+const sliceAs = require('../util/sliceAs');
+const types = require('../util/types');
 
 const NULL = '0000000000000000000000000000000000000000000000000000000000000000';
 
@@ -30,11 +30,11 @@ class Decoder {
 }
 
 Decoder.decode = function (params, data) {
-  if (!isArray(params)) {
+  if (!types.isArray(params)) {
     throw new Error('Parameters should be array of ParamType');
   }
 
-  const slices = sliceData(data);
+  const slices = slicer.sliceData(data);
   let offset = 0;
 
   return params.map(function (param) {
@@ -69,7 +69,7 @@ Decoder.takeBytes = function (slices, position, length) {
 };
 
 Decoder.decodeParam = function (param, slices, offset) {
-  if (!isInstanceOf(param, ParamType)) {
+  if (!types.isInstanceOf(param, ParamType)) {
     throw new Error('param should be instanceof ParamType');
   }
 
@@ -81,16 +81,16 @@ Decoder.decodeParam = function (param, slices, offset) {
 
   switch (param.type) {
     case 'address':
-      return new DecodeResult(new Token(param.type, asAddress(Decoder.peek(slices, offset))), offset + 1);
+      return new DecodeResult(new Token(param.type, sliceAs.asAddress(Decoder.peek(slices, offset))), offset + 1);
 
     case 'bool':
-      return new DecodeResult(new Token(param.type, asBool(Decoder.peek(slices, offset))), offset + 1);
+      return new DecodeResult(new Token(param.type, sliceAs.asBool(Decoder.peek(slices, offset))), offset + 1);
 
     case 'int':
-      return new DecodeResult(new Token(param.type, asI32(Decoder.peek(slices, offset))), offset + 1);
+      return new DecodeResult(new Token(param.type, sliceAs.asI32(Decoder.peek(slices, offset))), offset + 1);
 
     case 'uint':
-      return new DecodeResult(new Token(param.type, asU32(Decoder.peek(slices, offset))), offset + 1);
+      return new DecodeResult(new Token(param.type, sliceAs.asU32(Decoder.peek(slices, offset))), offset + 1);
 
     case 'fixedBytes':
       taken = Decoder.takeBytes(slices, offset, param.length);
@@ -98,8 +98,8 @@ Decoder.decodeParam = function (param, slices, offset) {
       return new DecodeResult(new Token(param.type, taken.bytes), taken.newOffset);
 
     case 'bytes':
-      lengthOffset = asU32(Decoder.peek(slices, offset)).div(32).toNumber();
-      length = asU32(Decoder.peek(slices, lengthOffset)).toNumber();
+      lengthOffset = sliceAs.asU32(Decoder.peek(slices, offset)).div(32).toNumber();
+      length = sliceAs.asU32(Decoder.peek(slices, lengthOffset)).toNumber();
       taken = Decoder.takeBytes(slices, lengthOffset + 1, length);
 
       return new DecodeResult(new Token(param.type, taken.bytes), offset + 1);
@@ -111,13 +111,13 @@ Decoder.decodeParam = function (param, slices, offset) {
         return new DecodeResult(new Token('fixedBytes', taken.bytes), offset + 1);
       }
 
-      lengthOffset = asU32(Decoder.peek(slices, offset)).div(32).toNumber();
-      length = asU32(Decoder.peek(slices, lengthOffset)).toNumber();
+      lengthOffset = sliceAs.asU32(Decoder.peek(slices, offset)).div(32).toNumber();
+      length = sliceAs.asU32(Decoder.peek(slices, lengthOffset)).toNumber();
       taken = Decoder.takeBytes(slices, lengthOffset + 1, length);
 
       const str = taken.bytes.map(function (code) {
-        return String.fromCharCode(code)).join('');
-      });
+        return String.fromCharCode(code);
+      }).join('');
 
       let decoded;
 
@@ -130,8 +130,8 @@ Decoder.decodeParam = function (param, slices, offset) {
       return new DecodeResult(new Token(param.type, decoded), offset + 1);
 
     case 'array':
-      lengthOffset = asU32(Decoder.peek(slices, offset)).div(32).toNumber();
-      length = asU32(Decoder.peek(slices, lengthOffset)).toNumber();
+      lengthOffset = sliceAs.asU32(Decoder.peek(slices, offset)).div(32).toNumber();
+      length = sliceAs.asU32(Decoder.peek(slices, lengthOffset)).toNumber();
       newOffset = lengthOffset + 1;
 
       for (let idx = 0; idx < length; idx++) {

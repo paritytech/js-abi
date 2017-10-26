@@ -17,7 +17,7 @@
 const BigNumber = require('bignumber.js');
 const utf8 = require('utf8');
 
-const { isArray } = require('./types');
+const types = require('./types');
 
 const ZERO_64 = '0000000000000000000000000000000000000000000000000000000000000000';
 
@@ -43,7 +43,7 @@ function padU32 (input) {
 }
 
 function stringToBytes (input) {
-  if (isArray(input)) {
+  if (types.isArray(input)) {
     return input;
   } else if (input.substr(0, 2) === '0x') {
     const matches = input.substr(2).toLowerCase().match(/.{1,2}/g) || [];
