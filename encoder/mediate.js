@@ -99,7 +99,7 @@ class Mediate {
           .join('');
 
       case 'array':
-        const prefix = padU32(this._value.length);
+        const prefix = padder.padU32(this._value.length);
         const inits = this._value
           .map(function (mediate, idx) {
             return mediate.init(offset + Mediate.offsetFor(this._value, idx) + 32).toString(16);

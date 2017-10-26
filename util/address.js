@@ -55,7 +55,7 @@ function toChecksumAddress (_address) {
     return '';
   }
 
-  const hash = keccak_256(address.slice(-40));
+  const hash = jssha.keccak_256(address.slice(-40));
   let result = '0x';
 
   for (let n = 0; n < 40; n++) {
