@@ -66,6 +66,8 @@ class Mediate {
   }
 
   init (suffixOffset) {
+    const self = this;
+
     switch (this._type) {
       case 'raw':
         return this._value;
@@ -73,7 +75,7 @@ class Mediate {
       case 'fixedArray':
         return this._value
           .map(function (mediate, idx) {
-            return mediate.init(Mediate.offsetFor(this._value, idx)).toString(16);
+            return mediate.init(Mediate.offsetFor(self._value, idx)).toString(16);
           })
           .join('');
 
@@ -84,6 +86,8 @@ class Mediate {
   }
 
   closing (offset) {
+    const self = this;
+
     switch (this._type) {
       case 'raw':
         return '';
@@ -94,7 +98,7 @@ class Mediate {
       case 'fixedArray':
         return this._value
           .map(function (mediate, idx) {
-            return mediate.closing(Mediate.offsetFor(this._value, idx)).toString(16);
+            return mediate.closing(Mediate.offsetFor(self._value, idx)).toString(16);
           })
           .join('');
 
@@ -102,12 +106,12 @@ class Mediate {
         const prefix = padder.padU32(this._value.length);
         const inits = this._value
           .map(function (mediate, idx) {
-            return mediate.init(offset + Mediate.offsetFor(this._value, idx) + 32).toString(16);
+            return mediate.init(offset + Mediate.offsetFor(self._value, idx) + 32).toString(16);
           })
           .join('');
         const closings = this._value
           .map(function (mediate, idx) {
-            return mediate.closing(offset + Mediate.offsetFor(this._value, idx)).toString(16);
+            return mediate.closing(offset + Mediate.offsetFor(self._value, idx)).toString(16);
           })
           .join('');
 
