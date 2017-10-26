@@ -32,7 +32,7 @@ class Param {
 }
 
 Param.toParams = function (params) {
-  return params.map((param) => {
+  return params.map(function (param) {
     if (param instanceof Param) {
       return param;
     }

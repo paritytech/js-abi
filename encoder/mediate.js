@@ -37,7 +37,7 @@ class Mediate {
 
       case 'fixedArray':
         return this._value
-          .reduce((total, mediate) => {
+          .reduce(function (total, mediate) {
             return total + mediate.initLength();
           }, 0);
     }
@@ -53,13 +53,13 @@ class Mediate {
 
       case 'array':
         return this._value
-          .reduce((total, mediate) => {
+          .reduce(function (total, mediate) {
             return total + mediate.initLength();
           }, 32);
 
       case 'fixedArray':
         return this._value
-          .reduce((total, mediate) => {
+          .reduce(function (total, mediate) {
             return total + mediate.initLength() + mediate.closingLength();
           }, 0);
     }
@@ -122,13 +122,13 @@ Mediate.offsetFor = function (mediates, position) {
   }
 
   const initLength = mediates
-    .reduce((total, mediate) => {
+    .reduce(function (total, mediate) {
       return total + mediate.initLength();
     }, 0);
 
   return mediates
     .slice(0, position)
-    .reduce((total, mediate) => {
+    .reduce(function (total, mediate) {
       return total + mediate.closingLength();
     }, initLength);
 };

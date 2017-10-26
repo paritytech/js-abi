@@ -81,12 +81,15 @@ class Event {
 
     const topicTypes = topicParams.map((param) => param.kind);
     const flatTopics = topics
-      .filter((topic, idx) => idx >= toSkip)
-      .map((topic) => {
+      .filter(function (topic, idx) {
+        return idx >= toSkip;
+      })
+      .map(function (topic) {
         return (topic.substr(0, 2) === '0x')
           ? topic.substr(2)
           : topic;
-      }).join('');
+      })
+      .join('');
     const topicTokens = Decoder.decode(topicTypes, flatTopics);
 
     if (topicTokens.length !== (topics.length - toSkip)) {
@@ -98,10 +101,10 @@ class Event {
 
     const namedTokens = {};
 
-    topicParams.forEach((param, idx) => {
+    topicParams.forEach(function (param, idx) {
       namedTokens[param.name || idx] = topicTokens[idx];
     });
-    dataParams.forEach((param, idx) => {
+    dataParams.forEach(function (param, idx) {
       namedTokens[param.name || idx] = dataTokens[idx];
     });
 

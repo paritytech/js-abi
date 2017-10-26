@@ -37,7 +37,7 @@ Decoder.decode = function (params, data) {
   const slices = sliceData(data);
   let offset = 0;
 
-  return params.map((param) => {
+  return params.map(function (param) {
     const result = Decoder.decodeParam(param, slices, offset);
 
     offset = result.newOffset;

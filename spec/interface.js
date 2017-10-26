@@ -58,7 +58,7 @@ Interface.encodeTokens = function (paramTypes, values) {
 };
 
 Interface.parseABI = function (abi) {
-  return abi.map((item) => {
+  return abi.map(function (item) {
     switch (item.type) {
       case 'constructor':
         return new Constructor(item);
