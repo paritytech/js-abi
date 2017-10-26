@@ -17,7 +17,7 @@
 const Decoder = require('../decoder/decoder');
 const Encoder = require('../encoder/encoder');
 const Param = require('./param');
-const { methodSignature } = require('../util/signature');
+const signature = require('../util/signature');
 
 class Func {
   constructor (abi) {
@@ -27,11 +27,11 @@ class Func {
     this._inputs = Param.toParams(abi.inputs || []);
     this._outputs = Param.toParams(abi.outputs || []);
 
-    const { id, name, signature } = methodSignature(abi.name, this.inputParamTypes());
+    const sig = signature.methodSignature(abi.name, this.inputParamTypes());
 
-    this._id = id;
-    this._name = name;
-    this._signature = signature;
+    this._id = sig.id;
+    this._name = sig.name;
+    this._signature = sig.signature;
   }
 
   get abi () {
@@ -67,11 +67,15 @@ class Func {
   }
 
   inputParamTypes () {
-    return this._inputs.map((input) => input.kind);
+    return this._inputs.map(function (input) {
+      return input.kind;
+    });
   }
 
   outputParamTypes () {
-    return this._outputs.map((output) => output.kind);
+    return this._outputs.map(function (output) {
+      return output.kind;
+    });
   }
 
   encodeCall (tokens) {

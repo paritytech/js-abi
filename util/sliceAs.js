@@ -16,7 +16,7 @@
 
 const BigNumber = require('bignumber.js');
 
-const { toChecksumAddress } = require('./address');
+const address = require('./address');
 
 function asU32 (slice) {
   // TODO: validation
@@ -37,7 +37,7 @@ function asI32 (slice) {
 function asAddress (slice) {
   // TODO: address validation?
 
-  return toChecksumAddress(`0x${slice.slice(-40)}`);
+  return address.toChecksumAddress(`0x${slice.slice(-40)}`);
 }
 
 function asBool (slice) {

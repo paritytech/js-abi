@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-const { keccak_256 } = require('js-sha3'); // eslint-disable-line camelcase
+const jssha = require('js-sha3'); // eslint-disable-line camelcase
 
 function isChecksumValid (_address) {
   const address = _address.replace('0x', '');
-  const hash = keccak_256(address.toLowerCase());
+  const hash = jssha.keccak_256(address.toLowerCase());
 
   for (let n = 0; n < 40; n++) {
     const char = address[n];
@@ -55,7 +55,7 @@ function toChecksumAddress (_address) {
     return '';
   }
 
-  const hash = keccak_256(address.slice(-40));
+  const hash = jssha.keccak_256(address.slice(-40));
   let result = '0x';
 
   for (let n = 0; n < 40; n++) {

@@ -18,19 +18,19 @@ const Decoder = require('../../decoder/decoder');
 const DecodedLog = require('./decodedLog');
 const DecodedLogParam = require('./decodedLogParam');
 const EventParam = require('./eventParam');
-const { asAddress } = require('../../util/sliceAs');
-const { eventSignature } = require('../../util/signature');
+const sliceAs = require('../../util/sliceAs');
+const signature = require('../../util/signature');
 
 class Event {
   constructor (abi) {
     this._inputs = EventParam.toEventParams(abi.inputs || []);
     this._anonymous = !!abi.anonymous;
 
-    const { id, name, signature } = eventSignature(abi.name, this.inputParamTypes());
+    const sig = signature.eventSignature(abi.name, this.inputParamTypes());
 
-    this._id = id;
-    this._name = name;
-    this._signature = signature;
+    this._id = sig.id;
+    this._name = sig.name;
+    this._signature = sig.signature;
   }
 
   get name () {
@@ -54,15 +54,21 @@ class Event {
   }
 
   inputParamTypes () {
-    return this._inputs.map((input) => input.kind);
+    return this._inputs.map(function (input) {
+      return input.kind;
+    });
   }
 
   inputParamNames () {
-    return this._inputs.map((input) => input.name);
+    return this._inputs.map(function (input) {
+      return input.name;
+    });
   }
 
   indexedParams (indexed) {
-    return this._inputs.filter((input) => input.indexed === indexed);
+    return this._inputs.filter(function (input) {
+      return input.indexed === indexed;
+    });
   }
 
   decodeLog (topics, data) {
@@ -73,41 +79,50 @@ class Event {
     let toSkip;
 
     if (!this.anonymous) {
-      address = asAddress(topics[0]);
+      address = sliceAs.asAddress(topics[0]);
       toSkip = 1;
     } else {
       toSkip = 0;
     }
 
-    const topicTypes = topicParams.map((param) => param.kind);
+    const topicTypes = topicParams.map(function (param) {
+      return param.kind;
+    });
     const flatTopics = topics
-      .filter((topic, idx) => idx >= toSkip)
-      .map((topic) => {
+      .filter(function (topic, idx) {
+        return idx >= toSkip;
+      })
+      .map(function (topic) {
         return (topic.substr(0, 2) === '0x')
           ? topic.substr(2)
           : topic;
-      }).join('');
+      })
+      .join('');
     const topicTokens = Decoder.decode(topicTypes, flatTopics);
 
     if (topicTokens.length !== (topics.length - toSkip)) {
       throw new Error('Invalid topic data');
     }
 
-    const dataTypes = dataParams.map((param) => param.kind);
+    const dataTypes = dataParams.map(function (param) {
+      return param.kind;
+    });
     const dataTokens = Decoder.decode(dataTypes, data);
 
     const namedTokens = {};
 
-    topicParams.forEach((param, idx) => {
+    topicParams.forEach(function (param, idx) {
       namedTokens[param.name || idx] = topicTokens[idx];
     });
-    dataParams.forEach((param, idx) => {
+    dataParams.forEach(function (param, idx) {
       namedTokens[param.name || idx] = dataTokens[idx];
     });
 
     const inputParamTypes = this.inputParamTypes();
     const decodedParams = this.inputParamNames()
-      .map((name, idx) => new DecodedLogParam(name, inputParamTypes[idx], namedTokens[name || idx]));
+      .map(function (name, idx) {
+        return new DecodedLogParam(name, inputParamTypes[idx], namedTokens[name || idx]);
+      });
 
     return new DecodedLog(decodedParams, address);
   }

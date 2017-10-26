@@ -14,59 +14,67 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-const { padAddress, padBool, padBytes, padFixedBytes, padU32, padString } = require('../util/pad');
+const padder = require('../util/pad');
 const Mediate = require('./mediate');
 const Token = require('../token/token');
-const { isArray, isInstanceOf } = require('../util/types');
+const types = require('../util/types');
 
 class Encoder {
 }
 
 Encoder.encode = function (tokens) {
-  if (!isArray(tokens)) {
+  if (!types.isArray(tokens)) {
     throw new Error('tokens should be array of Token');
   }
 
-  const mediates = tokens.map((token, index) => Encoder.encodeToken(token, index));
+  const mediates = tokens.map(function (token, index) {
+    return Encoder.encodeToken(token, index);
+  });
   const inits = mediates
-    .map((mediate, idx) => mediate.init(Mediate.offsetFor(mediates, idx)))
+    .map(function (mediate, idx) {
+      return mediate.init(Mediate.offsetFor(mediates, idx));
+    })
     .join('');
   const closings = mediates
-    .map((mediate, idx) => mediate.closing(Mediate.offsetFor(mediates, idx)))
+    .map(function (mediate, idx) {
+      return mediate.closing(Mediate.offsetFor(mediates, idx));
+    })
     .join('');
 
   return `${inits}${closings}`;
 };
 
 Encoder.encodeToken = function (token, index = 0) {
-  if (!isInstanceOf(token, Token)) {
+  if (!types.isInstanceOf(token, Token)) {
     throw new Error('token should be instanceof Token');
   }
 
   try {
     switch (token.type) {
       case 'address':
-        return new Mediate('raw', padAddress(token.value));
+        return new Mediate('raw', padder.padAddress(token.value));
 
       case 'int':
       case 'uint':
-        return new Mediate('raw', padU32(token.value));
+        return new Mediate('raw', padder.padU32(token.value));
 
       case 'bool':
-        return new Mediate('raw', padBool(token.value));
+        return new Mediate('raw', padder.padBool(token.value));
 
       case 'fixedBytes':
-        return new Mediate('raw', padFixedBytes(token.value));
+        return new Mediate('raw', padder.padFixedBytes(token.value));
 
       case 'bytes':
-        return new Mediate('prefixed', padBytes(token.value));
+        return new Mediate('prefixed', padder.padBytes(token.value));
 
       case 'string':
-        return new Mediate('prefixed', padString(token.value));
+        return new Mediate('prefixed', padder.padString(token.value));
 
       case 'fixedArray':
       case 'array':
-        return new Mediate(token.type, token.value.map((token) => Encoder.encodeToken(token)));
+        return new Mediate(token.type, token.value.map(function (token) {
+          return Encoder.encodeToken(token);
+        }));
     }
   } catch (e) {
     throw new Error(`Cannot encode token #${index} [${token.type}: ${token.value}]. ${e.message}`);

@@ -29,15 +29,21 @@ class Interface {
   }
 
   get constructors () {
-    return this._interface.filter((item) => item instanceof Constructor);
+    return this._interface.filter(function (item) {
+      return item instanceof Constructor;
+    });
   }
 
   get events () {
-    return this._interface.filter((item) => item instanceof Event);
+    return this._interface.filter(function (item) {
+      return item instanceof Event;
+    });
   }
 
   get functions () {
-    return this._interface.filter((item) => item instanceof Func);
+    return this._interface.filter(function (item) {
+      return item instanceof Func;
+    });
   }
 
   encodeTokens (paramTypes, values) {
@@ -48,17 +54,21 @@ class Interface {
 Interface.encodeTokens = function (paramTypes, values) {
   const createToken = function (paramType, value) {
     if (paramType.subtype) {
-      return new Token(paramType.type, value.map((entry) => createToken(paramType.subtype, entry)));
+      return new Token(paramType.type, value.map(function (entry) {
+        return createToken(paramType.subtype, entry);
+      }));
     }
 
     return new Token(paramType.type, value);
   };
 
-  return paramTypes.map((paramType, idx) => createToken(paramType, values[idx]));
+  return paramTypes.map(function (paramType, idx) {
+    return createToken(paramType, values[idx]);
+  });
 };
 
 Interface.parseABI = function (abi) {
-  return abi.map((item) => {
+  return abi.map(function (item) {
     switch (item.type) {
       case 'constructor':
         return new Constructor(item);

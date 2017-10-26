@@ -16,13 +16,13 @@
 
 const ParamType = require('../paramType/paramType');
 const Token = require('../../token/token');
-const { isInstanceOf } = require('../../util/types');
+const types = require('../../util/types');
 
 class DecodedLogParam {
   constructor (name, kind, token) {
-    if (!isInstanceOf(kind, ParamType)) {
+    if (!types.isInstanceOf(kind, ParamType)) {
       throw new Error('kind not instanceof ParamType');
-    } else if (!isInstanceOf(token, Token)) {
+    } else if (!types.isInstanceOf(token, Token)) {
       throw new Error('token not instanceof Token');
     }
 
