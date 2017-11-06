@@ -6,7 +6,6 @@ A very early, very POC-type port of [https://github.com/paritytech/ethabi](https
 [![Coverage Status](https://coveralls.io/repos/github/paritytech/js-abi/badge.svg?branch=master)](https://coveralls.io/github/paritytech/js-abi?branch=master)
 [![Dependency Status](https://david-dm.org/paritytech/js-abi.svg)](https://david-dm.org/paritytech/js-abi)
 [![devDependency Status](https://david-dm.org/paritytech/js-abi/dev-status.svg)](https://david-dm.org/paritytech/js-abi#info=devDependencies)
-[![Coverage Status](https://coveralls.io/repos/github/paritytech/js-abi/badge.svg?branch=master)](https://coveralls.io/github/paritytech/js-abi?branch=master)
 
 ## contributing
 
