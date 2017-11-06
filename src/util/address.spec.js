@@ -18,7 +18,7 @@
 
 const { isChecksumValid, isAddress, toChecksumAddress } = require('./address');
 
-describe('abi/util/address', () => {
+describe('util/address', () => {
   const value = '63Cf90D3f0410092FC0fca41846f596223979195';
   const address = `0x${value}`;
   const lowercase = `0x${value.toLowerCase()}`;

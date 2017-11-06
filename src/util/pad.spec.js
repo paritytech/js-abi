@@ -17,7 +17,7 @@
 const BigNumber = require('bignumber.js');
 const { padAddress, padBool, padBytes, padFixedBytes, padString, padU32 } = require('./pad');
 
-describe('abi/util/pad', () => {
+describe('util/pad', () => {
   const SHORT15 = '1234567890abcdef';
   const BYTES15 = [0x12, 0x34, 0x56, 0x78, 0x90, 0xab, 0xcd, 0xef];
   const LONG15 = `${SHORT15}000000000000000000000000000000000000000000000000`;

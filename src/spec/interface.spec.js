@@ -18,7 +18,7 @@ const Interface = require('./interface');
 const ParamType = require('./paramType');
 const Token = require('../token');
 
-describe('abi/spec/Interface', () => {
+describe('spec/Interface', () => {
   const construct = {
     type: 'constructor',
     inputs: []

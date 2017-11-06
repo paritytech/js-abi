@@ -16,7 +16,7 @@
 
 const BytesTaken = require('./bytesTaken');
 
-describe('abi/decoder/BytesTaken', () => {
+describe('decoder/BytesTaken', () => {
   describe('constructor', () => {
     it('sets the bytes of the object', () => {
       expect((new BytesTaken(1, 2)).bytes).to.equal(1);

@@ -18,7 +18,7 @@
 
 const { asAddress, asBool, asI32, asU32 } = require('./sliceAs');
 
-describe('abi/util/sliceAs', () => {
+describe('util/sliceAs', () => {
   const MAX_INT = 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
 
   describe('asAddress', () => {

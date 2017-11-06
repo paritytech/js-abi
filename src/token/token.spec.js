@@ -18,7 +18,7 @@
 
 const Token = require('./token');
 
-describe('abi/token/token', () => {
+describe('token/token', () => {
   describe('validateType', () => {
     it('validates address', () => {
       expect(Token.validateType('address')).to.be.true;

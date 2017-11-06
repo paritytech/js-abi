@@ -16,7 +16,7 @@
 
 const Param = require('./param');
 
-describe('abi/spec/Param', () => {
+describe('spec/Param', () => {
   describe('constructor', () => {
     const param = new Param('foo', 'uint');
 

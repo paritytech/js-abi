@@ -20,7 +20,7 @@ const Encoder = require('./encoder');
 const Token = require('../token');
 const { padAddress, padFixedBytes, padU32 } = require('../util/pad');
 
-describe('abi/encoder/Encoder', () => {
+describe('encoder/Encoder', () => {
   describe('encodeToken', () => {
     it('requires token as Token', () => {
       expect(() => Encoder.encodeToken()).to.throw(/Token/);

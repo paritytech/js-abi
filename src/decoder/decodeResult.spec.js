@@ -16,7 +16,7 @@
 
 const DecodeResult = require('./decodeResult');
 
-describe('abi/decoder/DecodeResult', () => {
+describe('decoder/DecodeResult', () => {
   describe('constructor', () => {
     it('sets the token of the object', () => {
       expect((new DecodeResult('token', 2)).token).to.equal('token');

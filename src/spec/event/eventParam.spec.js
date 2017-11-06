@@ -18,7 +18,7 @@
 
 const EventParam = require('./eventParam');
 
-describe('abi/spec/event/EventParam', () => {
+describe('spec/event/EventParam', () => {
   describe('constructor', () => {
     it('sets the properties', () => {
       const param = new EventParam('foo', 'uint', true);

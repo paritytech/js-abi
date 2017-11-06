@@ -19,7 +19,7 @@
 const { isArray, isString, isInstanceOf } = require('./types');
 const Token = require('../token');
 
-describe('abi/util/types', () => {
+describe('util/types', () => {
   describe('isArray', () => {
     it('correctly identifies empty arrays as Array', () => {
       expect(isArray([])).to.be.true;

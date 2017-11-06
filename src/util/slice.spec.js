@@ -16,7 +16,7 @@
 
 const { sliceData } = require('./slice');
 
-describe('abi/util/slice', () => {
+describe('util/slice', () => {
   describe('sliceData', () => {
     const slice1 = '131a3afc00d1b1e3461b955e53fc866dcf303b3eb9f4c16f89e388930f48134b';
     const slice2 = '2124768576358735263578356373526387638357635873563586353756358763';

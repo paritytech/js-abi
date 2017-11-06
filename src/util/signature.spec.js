@@ -16,7 +16,7 @@
 
 const { eventSignature, methodSignature } = require('./signature');
 
-describe('abi/util/signature', () => {
+describe('util/signature', () => {
   describe('eventSignature', () => {
     it('encodes signature baz() correctly', () => {
       expect(eventSignature('baz', [])).to.deep.equal({

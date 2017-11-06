@@ -18,7 +18,7 @@
 
 const ParamType = require('./paramType');
 
-describe('abi/spec/paramType/ParamType', () => {
+describe('spec/paramType/ParamType', () => {
   describe('validateType', () => {
     it('validates address', () => {
       expect(ParamType.validateType('address')).to.be.true;

@@ -24,7 +24,7 @@ const DecodedLogParam = require('./decodedLogParam');
 const ParamType = require('../paramType');
 const Token = require('../../token');
 
-describe('abi/spec/event/Event', () => {
+describe('spec/event/Event', () => {
   const inputArr = [{ name: 'a', type: 'bool' }, { name: 'b', type: 'uint', indexed: true }];
   const inputs = [new EventParam('a', 'bool', false), new EventParam('b', 'uint', true)];
   const event = new Event({ name: 'test', inputs: inputArr, anonymous: true });

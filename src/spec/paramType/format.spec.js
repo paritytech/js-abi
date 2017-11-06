@@ -17,7 +17,7 @@
 const ParamType = require('./paramType');
 const { fromParamType, toParamType } = require('./format');
 
-describe('abi/spec/paramType/format', () => {
+describe('spec/paramType/format', () => {
   describe('fromParamType', () => {
     it('errors on invalid types', () => {
       expect(() => fromParamType({ type: 'noMatch' })).to.throw(/noMatch/);

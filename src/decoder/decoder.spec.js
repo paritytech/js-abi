@@ -21,7 +21,7 @@ const ParamType = require('../spec/paramType');
 const Token = require('../token');
 const { padU32 } = require('../util/pad');
 
-describe('abi/decoder/Decoder', () => {
+describe('decoder/Decoder', () => {
   const stringToBytes = function (str) {
     return str.match(/.{1,2}/g).map((code) => parseInt(code, 16));
   };

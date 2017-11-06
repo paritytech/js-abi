@@ -18,7 +18,7 @@ const DecodedLogParam = require('./decodedLogParam');
 const ParamType = require('../paramType');
 const Token = require('../../token');
 
-describe('abi/spec/event/DecodedLogParam', () => {
+describe('spec/event/DecodedLogParam', () => {
   describe('constructor', () => {
     const pt = new ParamType('bool');
     const tk = new Token('bool');

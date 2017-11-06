@@ -20,7 +20,7 @@ const Func = require('./function');
 const Param = require('./param');
 const Token = require('../token');
 
-describe('abi/spec/Function', () => {
+describe('spec/Function', () => {
   const inputsArr = [{ name: 'boolin', type: 'bool' }, { name: 'stringin', type: 'string' }];
   const outputsArr = [{ name: 'output', type: 'uint' }];
 

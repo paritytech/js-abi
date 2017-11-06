@@ -18,7 +18,7 @@ const Constructor = require('./constructor');
 const Param = require('./param');
 const Token = require('../token');
 
-describe('abi/spec/Constructor', () => {
+describe('spec/Constructor', () => {
   const inputsArr = [{ name: 'boolin', type: 'bool' }, { name: 'stringin', type: 'string' }];
   const bool = new Param('boolin', 'bool');
   const string = new Param('stringin', 'string');
