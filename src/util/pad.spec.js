@@ -29,7 +29,7 @@ describe('util/pad', () => {
     });
 
     it('strips leading 0x when passed in', () => {
-      expect(padFixedBytes(`0x${PAD123}`)).to.equal(PAD123);
+      expect(padAddress(`0x${PAD123}`)).to.equal(PAD123);
     });
   });
 

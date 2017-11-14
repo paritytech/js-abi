@@ -22,7 +22,9 @@ const { isArray } = require('./types');
 const ZERO_64 = '0000000000000000000000000000000000000000000000000000000000000000';
 
 function padAddress (_input) {
-  const input = _input.substr(0, 2) === '0x' ? _input.substr(2) : _input;
+  const input = _input.substr(0, 2) === '0x'
+    ? _input.substr(2)
+    : _input;
 
   return `${ZERO_64}${input}`.slice(-64);
 }
