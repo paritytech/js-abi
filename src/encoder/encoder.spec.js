@@ -100,6 +100,14 @@ describe('encoder/Encoder', () => {
 
       expect(() => Encoder.encodeToken(token)).to.throw(/noMatch/);
     });
+
+    it('throws and error on invalid value tokens', () => {
+      const token = new Token('uint');
+
+      token._value = 'invalidNumber';
+
+      expect(() => Encoder.encodeToken(token)).to.throw(/Cannot encode/);
+    });
   });
 
   describe('encode', () => {

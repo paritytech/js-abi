@@ -93,6 +93,10 @@ describe('decoder/Decoder', () => {
         Decoder.takeBytes(slices, 1, 75).bytes
       ).to.deep.equal(stringToBytes(`${slices[1]}${slices[2]}${slices[3]}`.substr(0, 150)));
     });
+
+    it('returns with empty inputs', () => {
+      expect(Decoder.takeBytes([], 0, 0).bytes).to.deep.equal([]);
+    });
   });
 
   describe('decodeParam', () => {

@@ -88,6 +88,10 @@ describe('util/pad', () => {
     it('strips leading 0x when passed in', () => {
       expect(padFixedBytes(`0x${SHORT15}`)).to.equal(LONG15);
     });
+
+    it('encodes empty value when 0x is paased', () => {
+      expect(padFixedBytes('0x')).to.equal('');
+    });
   });
 
   describe('padBytes', () => {
