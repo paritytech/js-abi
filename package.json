@@ -23,12 +23,12 @@
     "node": ">=6.4"
   },
   "scripts": {
-    "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js",
+    "build": "rimraf lib && babel src --out-dir lib --ignore *.spec.js",
     "lint": "npm run lint:css && npm run lint:js",
     "lint:css": "echo \"WARN: npm run lint:css skipped\"",
     "lint:js": "eslint src",
-    "test": "NODE_ENV=test mocha src/**/*.spec.js",
-    "test:coverage": "NODE_ENV=test istanbul cover _mocha src/**/*.spec.js && coveralls < coverage/lcov.info"
+    "test": "cross-env NODE_ENV=test mocha 'src/**/*.spec.js'",
+    "test:coverage": "cross-env NODE_ENV=test istanbul cover _mocha 'src/**/*.spec.js' && coveralls < coverage/lcov.info"
   },
   "publishConfig": {
     "access": "public"
@@ -42,6 +42,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.1.0",
     "coveralls": "^3.0.0",
+    "cross-env": "^5.1.1",
     "eslint": "^4.4.0",
     "eslint-config-semistandard": "^11.0.0",
     "eslint-config-standard": "^10.2.1",
@@ -52,7 +53,8 @@
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-standard": "^3.0.1",
     "istanbul": "^0.4.5",
-    "mocha": "^3.4.2"
+    "mocha": "^3.4.2",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {
     "bignumber.js": "3.0.1",
