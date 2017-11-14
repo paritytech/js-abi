@@ -33,8 +33,8 @@ class Event {
     this._signature = signature;
   }
 
-  get name () {
-    return this._name;
+  get anonymous () {
+    return this._anonymous;
   }
 
   get id () {
@@ -45,8 +45,8 @@ class Event {
     return this._inputs;
   }
 
-  get anonymous () {
-    return this._anonymous;
+  get name () {
+    return this._name;
   }
 
   get signature () {

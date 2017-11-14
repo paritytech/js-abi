@@ -111,4 +111,26 @@ describe('spec/event/Event', () => {
       expect(() => event.decodeLog(['0000000000000000000000004444444444444444444444444444444444444444'], '0000000000000000000000000000000000000000000000000000000000000003')).to.throw(/Invalid/);
     });
   });
+
+  describe('getters', () => {
+    it('has the anonymous flag', () => {
+      expect(event.anonymous).to.be.true;
+    });
+
+    it('has the id', () => {
+      expect(event.id).to.equal('test(bool,uint256)');
+    });
+
+    it('has the inputs', () => {
+      expect(event.inputs).to.deep.equal(EventParam.toEventParams(inputArr));
+    });
+
+    it('has the name', () => {
+      expect(event.name).to.equal('test');
+    });
+
+    it('has the signature', () => {
+      expect(event.signature).to.equal('c6a64c1fca84a416d1cb4ffc520e996e959fdf982da96a0e5449b17c9532ed4e');
+    });
+  });
 });
