@@ -42,40 +42,28 @@ class Func {
     return this._constant;
   }
 
-  get name () {
-    return this._name;
-  }
-
   get id () {
     return this._id;
-  }
-
-  get payable () {
-    return this._payable;
   }
 
   get inputs () {
     return this._inputs;
   }
 
+  get name () {
+    return this._name;
+  }
+
   get outputs () {
     return this._outputs;
   }
 
+  get payable () {
+    return !!this._payable;
+  }
+
   get signature () {
     return this._signature;
-  }
-
-  inputParamTypes () {
-    return this._inputs.map((input) => input.kind);
-  }
-
-  outputParamTypes () {
-    return this._outputs.map((output) => output.kind);
-  }
-
-  encodeCall (tokens) {
-    return `${this._signature}${Encoder.encode(tokens)}`;
   }
 
   decodeInput (data) {
@@ -84,6 +72,18 @@ class Func {
 
   decodeOutput (data) {
     return Decoder.decode(this.outputParamTypes(), data);
+  }
+
+  encodeCall (tokens) {
+    return `${this._signature}${Encoder.encode(tokens)}`;
+  }
+
+  inputParamTypes () {
+    return this._inputs.map((input) => input.kind);
+  }
+
+  outputParamTypes () {
+    return this._outputs.map((output) => output.kind);
   }
 }
 

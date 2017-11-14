@@ -73,6 +73,39 @@ describe('spec/Function', () => {
     });
   });
 
+  describe('getters', () => {
+    const abi = {
+      name: 'test(bool,string)',
+      inputs: inputsArr,
+      outputs: outputsArr
+    };
+    const func = new Func(abi);
+
+    it('returns the abi', () => {
+      expect(func.abi).to.deep.equal(abi);
+    });
+
+    it('returns the constant flag', () => {
+      expect(func.constant).to.be.false;
+    });
+
+    it('returns the id', () => {
+      expect(func.id).to.equal('test(bool,string)');
+    });
+
+    it('returns the inputs', () => {
+      expect(func.inputs).to.deep.equal(Param.toParams(inputsArr));
+    });
+
+    it('returns the outputs', () => {
+      expect(func.outputs).to.deep.equal(Param.toParams(outputsArr));
+    });
+
+    it('returns the payable flag', () => {
+      expect(func.payable).to.be.false;
+    });
+  });
+
   describe('inputParamTypes', () => {
     it('retrieves the input types as received', () => {
       expect(func.inputParamTypes()).to.deep.equal([bool.kind, string.kind]);
@@ -85,11 +118,18 @@ describe('spec/Function', () => {
     });
   });
 
-  describe('encodeCall', () => {
-    it('encodes the call correctly', () => {
-      const result = func.encodeCall([new Token('bool', true), new Token('string', 'jacogr')]);
-
-      expect(result).to.equal('023562050000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000066a61636f67720000000000000000000000000000000000000000000000000000');
+  describe('decodeInput', () => {
+    it('decodes the inputs correctly', () => {
+      expect(func.decodeInput('0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000066a61636f67720000000000000000000000000000000000000000000000000000')).to.deep.equal([
+        {
+          _type: 'bool',
+          _value: true
+        },
+        {
+          _type: 'string',
+          _value: 'jacogr'
+        }
+      ]);
     });
   });
 
@@ -98,6 +138,14 @@ describe('spec/Function', () => {
       const result = func.decodeOutput('1111111111111111111111111111111111111111111111111111111111111111');
 
       expect(result[0].value.toString(16)).to.equal('1111111111111111111111111111111111111111111111111111111111111111');
+    });
+  });
+
+  describe('encodeCall', () => {
+    it('encodes the call correctly', () => {
+      const result = func.encodeCall([new Token('bool', true), new Token('string', 'jacogr')]);
+
+      expect(result).to.equal('023562050000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000066a61636f67720000000000000000000000000000000000000000000000000000');
     });
   });
 });

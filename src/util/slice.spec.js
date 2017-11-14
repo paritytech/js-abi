@@ -25,6 +25,12 @@ describe('util/slice', () => {
       expect(sliceData('')).to.deep.equal([]);
     });
 
+    it('returns array with zero entry when data === 0x', () => {
+      expect(sliceData('0x')).to.deep.equal([
+        '0000000000000000000000000000000000000000000000000000000000000000'
+      ]);
+    });
+
     it('returns an array with the slices otherwise', () => {
       const sliced = sliceData(`${slice1}${slice2}`);
 
