@@ -34,13 +34,13 @@ function methodSignature (methodName, params) {
 
 function parseName (name) {
   const strName = `${name || ''}`;
-  const idx = strName.indexOf('(');
+  const index = strName.indexOf('(');
 
-  if (idx === -1) {
+  if (index === -1) {
     return { strName, name };
   }
 
-  const trimmedName = strName.slice(0, idx);
+  const trimmedName = strName.slice(0, index);
 
   return {
     strName: trimmedName,

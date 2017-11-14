@@ -57,8 +57,8 @@ Decoder.takeBytes = function (slices, position, length) {
   const slicesLength = Math.floor((length + 31) / 32);
   let bytesStr = '';
 
-  for (let idx = 0; idx < slicesLength; idx++) {
-    bytesStr = `${bytesStr}${Decoder.peek(slices, position + idx)}`;
+  for (let index = 0; index < slicesLength; index++) {
+    bytesStr = `${bytesStr}${Decoder.peek(slices, position + index)}`;
   }
 
   const bytes = (bytesStr.substr(0, length * 2).match(/.{1,2}/g) || []).map((code) => parseInt(code, 16));
@@ -130,7 +130,7 @@ Decoder.decodeParam = function (param, slices, offset) {
       length = asU32(Decoder.peek(slices, lengthOffset)).toNumber();
       newOffset = lengthOffset + 1;
 
-      for (let idx = 0; idx < length; idx++) {
+      for (let index = 0; index < length; index++) {
         const result = Decoder.decodeParam(param.subtype, slices, newOffset);
 
         newOffset = result.newOffset;
@@ -142,7 +142,7 @@ Decoder.decodeParam = function (param, slices, offset) {
     case 'fixedArray':
       newOffset = offset;
 
-      for (let idx = 0; idx < param.length; idx++) {
+      for (let index = 0; index < param.length; index++) {
         const result = Decoder.decodeParam(param.subtype, slices, newOffset);
 
         newOffset = result.newOffset;

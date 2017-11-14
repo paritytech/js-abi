@@ -29,10 +29,10 @@ Encoder.encode = function (tokens) {
 
   const mediates = tokens.map((token, index) => Encoder.encodeToken(token, index));
   const inits = mediates
-    .map((mediate, idx) => mediate.init(Mediate.offsetFor(mediates, idx)))
+    .map((mediate, index) => mediate.init(Mediate.offsetFor(mediates, index)))
     .join('');
   const closings = mediates
-    .map((mediate, idx) => mediate.closing(Mediate.offsetFor(mediates, idx)))
+    .map((mediate, index) => mediate.closing(Mediate.offsetFor(mediates, index)))
     .join('');
 
   return `${inits}${closings}`;

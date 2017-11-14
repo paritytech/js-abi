@@ -72,7 +72,7 @@ class Mediate {
 
       case 'fixedArray':
         return this._value
-          .map((mediate, idx) => mediate.init(Mediate.offsetFor(this._value, idx)).toString(16))
+          .map((mediate, index) => mediate.init(Mediate.offsetFor(this._value, index)).toString(16))
           .join('');
 
       case 'prefixed':
@@ -91,16 +91,16 @@ class Mediate {
 
       case 'fixedArray':
         return this._value
-          .map((mediate, idx) => mediate.closing(Mediate.offsetFor(this._value, idx)).toString(16))
+          .map((mediate, index) => mediate.closing(Mediate.offsetFor(this._value, index)).toString(16))
           .join('');
 
       case 'array':
         const prefix = padU32(this._value.length);
         const inits = this._value
-          .map((mediate, idx) => mediate.init(offset + Mediate.offsetFor(this._value, idx) + 32).toString(16))
+          .map((mediate, index) => mediate.init(offset + Mediate.offsetFor(this._value, index) + 32).toString(16))
           .join('');
         const closings = this._value
-          .map((mediate, idx) => mediate.closing(offset + Mediate.offsetFor(this._value, idx)).toString(16))
+          .map((mediate, index) => mediate.closing(offset + Mediate.offsetFor(this._value, index)).toString(16))
           .join('');
 
         return `${prefix}${inits}${closings}`;

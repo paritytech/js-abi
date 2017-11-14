@@ -81,7 +81,7 @@ class Event {
 
     const topicTypes = topicParams.map((param) => param.kind);
     const flatTopics = topics
-      .filter((topic, idx) => idx >= toSkip)
+      .filter((topic, index) => index >= toSkip)
       .map((topic) => {
         return (topic.substr(0, 2) === '0x')
           ? topic.substr(2)
@@ -98,16 +98,16 @@ class Event {
 
     const namedTokens = {};
 
-    topicParams.forEach((param, idx) => {
-      namedTokens[param.name || idx] = topicTokens[idx];
+    topicParams.forEach((param, index) => {
+      namedTokens[param.name || index] = topicTokens[index];
     });
-    dataParams.forEach((param, idx) => {
-      namedTokens[param.name || idx] = dataTokens[idx];
+    dataParams.forEach((param, index) => {
+      namedTokens[param.name || index] = dataTokens[index];
     });
 
     const inputParamTypes = this.inputParamTypes();
     const decodedParams = this.inputParamNames()
-      .map((name, idx) => new DecodedLogParam(name, inputParamTypes[idx], namedTokens[name || idx]));
+      .map((name, index) => new DecodedLogParam(name, inputParamTypes[index], namedTokens[name || index]));
 
     return new DecodedLog(decodedParams, address);
   }

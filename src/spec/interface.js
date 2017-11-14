@@ -54,7 +54,7 @@ Interface.encodeTokens = function (paramTypes, values) {
     return new Token(paramType.type, value);
   };
 
-  return paramTypes.map((paramType, idx) => createToken(paramType, values[idx]));
+  return paramTypes.map((paramType, index) => createToken(paramType, values[index]));
 };
 
 Interface.parseABI = function (abi) {
