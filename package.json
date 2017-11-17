@@ -53,6 +53,7 @@
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-standard": "^3.0.1",
     "istanbul": "^0.4.5",
+    "makeshift": "^1.1.0",
     "mocha": "^3.4.2",
     "rimraf": "^2.6.2"
   },
