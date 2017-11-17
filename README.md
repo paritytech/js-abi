@@ -27,4 +27,4 @@ Install the package with `npm install --save @parity/abi` from [@parity/abi](htt
 
 - internally the library operates on string binary representations as opposed to Vector bytes, lengths are therefore 64 bytes as opposed to 32 bytes
 - function names are adapted from the Rust standard snake_case to the JavaScript standard camelCase
-- due to the initial library focus, the cli component (as implemented by the original) is not supported nor mplemented
+- due to the initial library focus, the cli component (as implemented by the original) is not supported nor implemented
